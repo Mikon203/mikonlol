@@ -1,1 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flash Games</title>
+
+<style>
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#fff;
+  color:#000;
+}
+
+#side{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:158px;
+  background:#111;
+  padding-top:14px;
+}
+
+#side a{
+  display:block;
+  color:#999;
+  font-size:24px;
+  padding:8px 14px;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+#side a:hover,
+#side a.on{
+  color:#fff;
+  background:#222;
+}
+
+main{
+  margin-left:158px;
+  padding:20px 18px 60px;
+}
+
+.shout{
+  font-size:18px;
+  text-transform:uppercase;
+}
+
+hr{
+  border:0;
+  border-top:2px solid #333;
+  margin:14px 0;
+}
+
+h2{
+  font-size:36px;
+  margin:18px 0 12px;
+}
+
+.win{
+  width:min(100%,640px);
+  border:1px solid #666;
+  background:#000;
+}
+
+.screen{
+  background:#000;
+  width:100%;
+  height:min(70vw,400px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#888;
+  text-align:center;
+  overflow:hidden;
+}
+
+.screen ruffle-player{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+/* REAL FULLSCREEN */
+.screen:fullscreen{
+  width:100vw;
+  height:100vh;
+  border:0;
+  margin:0;
+  padding:0;
+  background:#000;
+}
+
+.screen:-webkit-full-screen{
+  width:100vw;
+  height:100vh;
+  border:0;
+  margin:0;
+  padding:0;
+  background:#000;
+}
+
+.screen:fullscreen ruffle-player{
+  width:100vw !important;
+  height:100vh !important;
+}
+
+.screen:-webkit-full-screen ruffle-player{
+  width:100vw !important;
+  height:100vh !important;
+}
+
+/* Hide the website's VM bar while the actual game is fullscreen */
+body:has(.screen:fullscreen) .vm{
+  display:none;
+}
+
+body:has(.screen:-webkit-full-screen) .vm{
+  display:none;
+}
+
+.vm{
+  background:#000;
+  color:#fff;
+  font:bold 12px Arial;
+  display:flex;
+  justify-content:space-between;
+  padding:6px 4px;
+}
+
+.vm i{
+  display:inline-block;
+  width:14px;
+  height:14px;
+  background:#1ba1e2;
+  margin-right:8px;
+  vertical-align:middle;
+}
+
+.go{
+  background:none;
+  border:0;
+  padding:0;
+  margin-top:6px;
+  cursor:pointer;
+  display:block;
+}
+
+.logo{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:0 0 14px;
+}
+
+.grajsm{
+  width:120px;
+  height:auto;
+  display:block;
+}
+
+.grajbig{
+  width:164px;
+  max-width:60%;
+  height:auto;
+  display:block;
+  margin:14px 0 6px;
+}
+
+/* FULLSCREEN BUTTON */
+.fullscreen{
+  background:none;
+  border:0;
+  padding:0;
+  margin:8px 0 14px;
+  cursor:pointer;
+  display:block;
+}
+
+.fullscreen img{
+  width:268px;
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+
+.fullscreen:hover img{
+  filter:brightness(1.15);
+}
+
+.go:hover .grajsm{
+  filter:brightness(1.25);
+}
+
+.item{
+  margin-bottom:26px;
+}
+
+.item p{
+  margin:6px 0 0;
+  font-size:14px;
+}
+
+.hide{
+  display:none;
+}
+
+/* When fullscreen is active, make the whole page black */
+body:has(.screen:fullscreen){
+  background:#000;
+}
+
+body:has(.screen:-webkit-full-screen){
+  background:#000;
+}
+
+@media(max-width:600px){
+  #side{
+    width:96px;
+  }
+
+  #side a{
+    font-size:16px;
+    padding:8px;
+  }
+
+  main{
+    margin-left:96px;
+  }
+
+  h2{
+    font-size:26px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="side">
+  <a data-p="home" class="on">Home</a>
+  <a data-p="gry">Games</a>
+  <a data-p="info">Info</a>
+</div>
+
+<main>
+
+<section id="home">
+
+  <img
+    class="logo"
+    src="https://images.cooltext.com/5765071.gif"
+    alt="Games with aura"
+    width="583"
+    height="105">
+
+  <div class="win">
+
+    <div class="screen" id="homeScreen">
+      Pick a game from the list below.
+    </div>
+
+    <div class="vm">
+      <span>
+        <i></i>
+        <span id="homeName">Nothing selected</span>
+      </span>
+
+      <span>FLASHA</span>
+    </div>
+
+  </div>
+
+  <!-- FULLSCREEN -->
+  <button
+    class="fullscreen"
+    id="fullscreenBtn"
+    aria-label="Fullscreen">
+
+    <img
+      src="https://images.cooltext.com/5765072.gif"
+      width="268"
+      height="68"
+      alt="FULLSCREEN">
+
+  </button>
+
+  <p class="shout">
+    mega aura games xd
+  </p>
+
+  <img
+    class="grajbig"
+    src="https://images.cooltext.com/5765070.gif"
+    alt="Play"
+    width="164"
+    height="105">
+
+  <hr>
+
+  <div id="list"></div>
+
+</section>
+
+
+<section id="gry" class="hide">
+
+  <h2>ALL GAMES</h2>
+
+  <hr>
+
+  <div id="list2"></div>
+
+</section>
+
+
+<section id="info" class="hide">
+
+  <h2>Info</h2>
+
+  <hr>
+
+  <p>thx ruffle emulator.</p>
+
+ <p>games have big aura made by me lollllllllllllllllllllllll</p>
+
+  <p>
+    TEXT:
+    <a href="https://es.cooltext.com">from here</a>.
+  </p>
+
+</section>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   GAME NAMES
+   ===================================================== */
+
+const NAMES = {};
+
+
+/* =====================================================
+   ONLINE GAMES
+   ===================================================== */
+
+const ONLINE = [
+
+  {
+    name:"DZIWNY KLOCEK",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/bloxorz.swf"
+  },
+
+  {
+    name:"CHLOP Z DRINKAMI",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/flash_therightmix.swf"
+  },
+
+  {
+    name:"PIZZA SEROWA",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/papaspizzeria_v2.swf"
+  },
+
+  {
+    name:"TROCHE TRUDNA GRA",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/theworldshardestgame.swf"
+  },
+
+  {
+    name:"CZERWONA KULKA",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/kulka.swf"
+  },
+
+    {
+    name:"SUPER MARIA",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/super-mario-flash-2.swf"
+  },
+
+      {
+    name:"NIEBIESKI DZIWAK",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/sonic.swf"
+  },
+
+        {
+    name:"MIAŁ",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/kot.swf"
+  },
+
+          {
+    name:"BALONKI",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/bloonstd.swf"
+  },
+
+            {
+    name:"LATAJACE CZERWONE KULKI",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/latajaca%20kulka.swf"
+  },
+
+              {
+    name:"DIDDY SIMULATOR",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/w%20prsion.swf"
+  },
+
+                {
+    name:"RYBKI",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/flash_fishy.swf"
+  },
+
+                {
+    name:"ZOLTA KULKA",
+    url:"https://file.garden/afOd2ilbYh0xRrwS/games/pacman.swf"
+  }
+
+];
+
+
+/* =====================================================
+   VARIABLES
+   ===================================================== */
+
+const $ = s => document.querySelector(s);
+
+let player = null;
+let GAMES = [];
+
+
+/* =====================================================
+   NAMES
+   ===================================================== */
+
+const pretty = f =>
+  NAMES[f] ||
+  f
+    .replace(/\.swf$/i,"")
+    .replace(/[_-]+/g," ")
+    .replace(/^./,c=>c.toUpperCase());
+
+
+const isSwf = f =>
+  /\.swf$/i.test(f);
+
+
+const toGames = files =>
+  files
+    .filter(isSwf)
+    .sort((a,b)=>a.localeCompare(b,"pl"))
+    .map(f=>({
+      name:pretty(f),
+      file:"games/"+encodeURIComponent(f),
+      desc:""
+    }));
+
+
+/* =====================================================
+   games FOLDER
+   ===================================================== */
+
+async function fromListing(){
+
+  const r = await fetch("games/");
+
+  if(!r.ok)
+    return [];
+
+  const d =
+    new DOMParser().parseFromString(
+      await r.text(),
+      "text/html"
+    );
+
+  return [
+    ...d.querySelectorAll("a[href]")
+  ]
+    .map(a=>
+      decodeURIComponent(
+        a
+          .getAttribute("href")
+          .split("?")[0]
+          .split("/")
+          .pop()
+      )
+    )
+    .filter(isSwf);
+}
+
+
+/* =====================================================
+   GITHUB
+   ===================================================== */
+
+async function fromGithub(){
+
+  const h=location.hostname;
+
+  if(!h.endsWith(".github.io"))
+    return [];
+
+  const user=h.split(".")[0];
+
+  const repo=
+    location.pathname.split("/")[1]||h;
+
+  try{
+
+    const c=
+      JSON.parse(
+        localStorage.getItem("ghgames")
+      );
+
+    if(
+      c &&
+      Date.now()-c.t<6e5
+    )
+      return c.f;
+
+  }catch(e){}
+
+  const r=
+    await fetch(
+      "https://api.github.com/repos/"+
+      user+"/"+repo+
+      "/contents/games"
+    );
+
+  if(!r.ok)
+    return [];
+
+  const f=
+    (await r.json()).map(x=>x.name);
+
+  try{
+
+    localStorage.setItem(
+      "ghgames",
+      JSON.stringify({
+        t:Date.now(),
+        f
+      })
+    );
+
+  }catch(e){}
+
+  return f;
+}
+
+
+/* =====================================================
+   games.json
+   ===================================================== */
+
+async function fromJson(){
+
+  const r=
+    await fetch("games/games.json");
+
+  return r.ok
+    ? await r.json()
+    : [];
+}
+
+
+/* =====================================================
+   DETECTION
+   ===================================================== */
+
+async function detect(){
+
+  for(
+    const fn of [
+      fromListing,
+      fromGithub,
+      fromJson
+    ]
+  ){
+
+    try{
+
+      const f=await fn();
+
+      if(f.length)
+        return toGames(f);
+
+    }catch(e){}
+
+  }
+
+  return [];
+}
+
+
+/* =====================================================
+   START GAME
+   ===================================================== */
+
+function play(g){
+
+  const box=$("#homeScreen");
+
+  box.innerHTML="";
+
+  const r=
+    window.RufflePlayer &&
+    window.RufflePlayer.newest();
+
+  if(!r){
+
+    box.textContent=
+      "Could not load the emulator (Ruffle).";
+
+    return;
+  }
+
+  player=r.createPlayer();
+
+  player.style.width="100%";
+  player.style.height="100%";
+  player.style.display="block";
+
+  box.appendChild(player);
+
+  player.load(g.file);
+
+  $("#homeName").textContent=g.name;
+
+  show("home");
+
+  window.scrollTo(0,0);
+}
+
+
+/* =====================================================
+   REAL FULLSCREEN
+   ===================================================== */
+
+$("#fullscreenBtn").addEventListener(
+  "click",
+  async()=>{
+
+    const gameScreen=$("#homeScreen");
+
+    try{
+
+      if(
+        document.fullscreenElement ||
+        document.webkitFullscreenElement
+      ){
+
+        if(document.exitFullscreen){
+
+          await document.exitFullscreen();
+
+        }else if(document.webkitExitFullscreen){
+
+          document.webkitExitFullscreen();
+
+        }
+
+        return;
+      }
+
+
+      /*
+       * FULLSCREEN OF THE GAME SCREEN ONLY
+       *
+       * Not .win.
+       * Not the whole page.
+       * Only the Ruffle area.
+       */
+
+      if(gameScreen.requestFullscreen){
+
+        await gameScreen.requestFullscreen();
+
+      }else if(gameScreen.webkitRequestFullscreen){
+
+        gameScreen.webkitRequestFullscreen();
+
+      }
+
+    }catch(e){
+
+      console.error(
+        "Could not enter fullscreen:",
+        e
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   GAME LIST
+   ===================================================== */
+
+function render(el){
+
+  el.innerHTML="";
+
+  if(!GAMES.length){
+
+    el.textContent=
+      "No games found. Put .swf files in the games folder.";
+
+    return;
+  }
+
+  GAMES.forEach(g=>{
+
+    const d=
+      document.createElement("div");
+
+    d.className="item";
+
+    d.innerHTML=`
+
+      <h2></h2>
+
+      <p></p>
+
+      <button
+        class="go"
+        aria-label="Play">
+
+        <img
+          class="grajsm"
+          src="https://images.cooltext.com/5765070.gif"
+          alt="Play"
+          width="164"
+          height="105">
+
+      </button>
+
+    `;
+
+    d.querySelector("h2")
+      .textContent=g.name;
+
+    d.querySelector("p")
+      .textContent=g.desc||"";
+
+    d.querySelector("button")
+      .onclick=()=>play(g);
+
+    el.appendChild(d);
+
+  });
+
+}
+
+
+/* =====================================================
+   RENDER
+   ===================================================== */
+
+function renderAll(){
+
+  render($("#list"));
+  render($("#list2"));
+
+}
+
+
+/* =====================================================
+   MENU
+   ===================================================== */
+
+function show(p){
+
+  document
+    .querySelectorAll("main>section")
+    .forEach(s=>
+      s.classList.toggle(
+        "hide",
+        s.id!==p
+      )
+    );
+
+  document
+    .querySelectorAll("#side a")
+    .forEach(a=>
+      a.classList.toggle(
+        "on",
+        a.dataset.p===p
+      )
+    );
+
+}
+
+
+document
+  .querySelectorAll("#side a")
+  .forEach(a=>
+    a.onclick=()=>show(a.dataset.p)
+  );
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+detect().then(g=>{
+
+  GAMES=[
+    ...g,
+
+    ...ONLINE.map(o=>({
+      name:o.name,
+      file:o.url,
+      desc:o.desc||""
+    }))
+  ];
+
+  renderAll();
+
+});
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle"></script>
+
+</body>
+</html>
 
