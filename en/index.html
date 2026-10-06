@@ -352,74 +352,7 @@ const NAMES = {};
    ONLINE GAMES
    ===================================================== */
 
-const ONLINE = [
-
-  {
-    name:"DZIWNY KLOCEK",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/bloxorz.swf"
-  },
-
-  {
-    name:"CHLOP Z DRINKAMI",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/flash_therightmix.swf"
-  },
-
-  {
-    name:"PIZZA SEROWA",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/papaspizzeria_v2.swf"
-  },
-
-  {
-    name:"TROCHE TRUDNA GRA",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/theworldshardestgame.swf"
-  },
-
-  {
-    name:"CZERWONA KULKA",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/kulka.swf"
-  },
-
-    {
-    name:"SUPER MARIA",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/super-mario-flash-2.swf"
-  },
-
-      {
-    name:"NIEBIESKI DZIWAK",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/sonic.swf"
-  },
-
-        {
-    name:"MIAŁ",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/kot.swf"
-  },
-
-          {
-    name:"BALONKI",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/bloonstd.swf"
-  },
-
-            {
-    name:"LATAJACE CZERWONE KULKI",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/latajaca%20kulka.swf"
-  },
-
-              {
-    name:"DIDDY SIMULATOR",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/w%20prsion.swf"
-  },
-
-                {
-    name:"RYBKI",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/flash_fishy.swf"
-  },
-
-                {
-    name:"ZOLTA KULKA",
-    url:"https://file.garden/afOd2ilbYh0xRrwS/games/pacman.swf"
-  }
-
-];
+let ONLINE = [];
 
 
 /* =====================================================
@@ -559,11 +492,18 @@ async function fromGithub(){
 async function fromJson(){
 
   const r=
-    await fetch("games/games.json");
+    await fetch("../games.json");
 
-  return r.ok
-    ? await r.json()
-    : [];
+  if(!r.ok)
+    return [];
+
+  const data = await r.json();
+  
+  return data.map(game => ({
+    name: game.en_name,
+    file: game.link,
+    desc: ""
+  }));
 }
 
 
@@ -586,7 +526,7 @@ async function detect(){
       const f=await fn();
 
       if(f.length)
-        return toGames(f);
+        return f;
 
     }catch(e){}
 
@@ -810,15 +750,7 @@ document
 
 detect().then(g=>{
 
-  GAMES=[
-    ...g,
-
-    ...ONLINE.map(o=>({
-      name:o.name,
-      file:o.url,
-      desc:o.desc||""
-    }))
-  ];
+  GAMES = g;
 
   renderAll();
 
@@ -831,4 +763,3 @@ detect().then(g=>{
 
 </body>
 </html>
-
