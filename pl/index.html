@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -25,6 +24,7 @@ html,body{
   width:158px;
   background:#111;
   padding-top:14px;
+  user-select:none;
 }
 
 #side a{
@@ -34,6 +34,8 @@ html,body{
   padding:8px 14px;
   text-decoration:none;
   cursor:pointer;
+  user-select:none;
+  -webkit-user-select:none;
 }
 
 #side a:hover,
@@ -322,11 +324,13 @@ body:has(.screen:-webkit-full-screen){
 
 const NAMES = {};
 
+
 /* =====================================================
    GRY ONLINE
    ===================================================== */
 
 let ONLINE = [];
+
 
 /* =====================================================
    ZMIENNE
@@ -336,6 +340,7 @@ const $ = s => document.querySelector(s);
 
 let player = null;
 let GAMES = [];
+
 
 /* =====================================================
    NAZWY
@@ -348,8 +353,10 @@ const pretty = f =>
     .replace(/[_-]+/g," ")
     .replace(/^./,c=>c.toUpperCase());
 
+
 const isSwf = f =>
   /\.swf$/i.test(f);
+
 
 const toGames = files =>
   files
@@ -360,6 +367,7 @@ const toGames = files =>
       file:"games/"+encodeURIComponent(f),
       desc:""
     }));
+
 
 /* =====================================================
    FOLDER games
@@ -392,6 +400,7 @@ async function fromListing(){
     )
     .filter(isSwf);
 }
+
 
 /* =====================================================
    GITHUB
@@ -452,6 +461,7 @@ async function fromGithub(){
   return f;
 }
 
+
 /* =====================================================
    games.json
    ===================================================== */
@@ -472,6 +482,7 @@ async function fromJson(){
     desc: ""
   }));
 }
+
 
 /* =====================================================
    WYKRYWANIE
@@ -500,6 +511,7 @@ async function detect(){
 
   return [];
 }
+
 
 /* =====================================================
    URUCHOMIENIE GRY
@@ -539,6 +551,7 @@ function play(g){
 
   window.scrollTo(0,0);
 }
+
 
 /* =====================================================
    PRAWDZIWY FULLSCREEN
@@ -591,6 +604,7 @@ $("#fullscreenBtn").addEventListener(
 
   }
 );
+
 
 /* =====================================================
    LISTA GIER
@@ -651,6 +665,7 @@ function render(el){
 
 }
 
+
 /* =====================================================
    RENDER
    ===================================================== */
@@ -662,11 +677,42 @@ function renderAll(){
 
 }
 
+
 /* =====================================================
-   MENU + INFO EASTER EGG
+   MENU + PTOSZEK EASTER EGG
    ===================================================== */
 
 let infoClicks = 0;
+
+document.querySelectorAll("#side a").forEach(a=>{
+
+  a.addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    if(this.dataset.p === "info"){
+
+      infoClicks++;
+
+      if(infoClicks >= 3){
+
+        window.location.assign("https://ptoszek.pl");
+        return;
+
+      }
+
+    }
+
+    show(this.dataset.p);
+
+  });
+
+});
+
+
+/* =====================================================
+   POKAZYWANIE SEKCJI
+   ===================================================== */
 
 function show(p){
 
@@ -690,30 +736,6 @@ function show(p){
 
 }
 
-document
-  .querySelectorAll("#side a")
-  .forEach(a=>{
-
-    a.onclick=()=>{
-
-      if(a.dataset.p==="info"){
-
-        infoClicks++;
-
-        if(infoClicks>=3){
-
-          window.location.href="https://ptoszek.pl";
-          return;
-
-        }
-
-      }
-
-      show(a.dataset.p);
-
-    };
-
-  });
 
 /* =====================================================
    START
