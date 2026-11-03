@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -86,16 +87,7 @@ h2{
   height:100%;
 }
 
-/* REAL FULLSCREEN */
-.screen:fullscreen{
-  width:100vw;
-  height:100vh;
-  border:0;
-  margin:0;
-  padding:0;
-  background:#000;
-}
-
+.screen:fullscreen,
 .screen:-webkit-full-screen{
   width:100vw;
   height:100vh;
@@ -105,21 +97,13 @@ h2{
   background:#000;
 }
 
-.screen:fullscreen ruffle-player{
-  width:100vw !important;
-  height:100vh !important;
-}
-
+.screen:fullscreen ruffle-player,
 .screen:-webkit-full-screen ruffle-player{
   width:100vw !important;
   height:100vh !important;
 }
 
-/* Hide the website's VM bar while the actual game is fullscreen */
-body:has(.screen:fullscreen) .vm{
-  display:none;
-}
-
+body:has(.screen:fullscreen) .vm,
 body:has(.screen:-webkit-full-screen) .vm{
   display:none;
 }
@@ -172,7 +156,6 @@ body:has(.screen:-webkit-full-screen) .vm{
   margin:14px 0 6px;
 }
 
-/* FULLSCREEN BUTTON */
 .fullscreen{
   background:none;
   border:0;
@@ -210,11 +193,7 @@ body:has(.screen:-webkit-full-screen) .vm{
   display:none;
 }
 
-/* When fullscreen is active, make the whole page black */
-body:has(.screen:fullscreen){
-  background:#000;
-}
-
+body:has(.screen:fullscreen),
 body:has(.screen:-webkit-full-screen){
   background:#000;
 }
@@ -276,7 +255,6 @@ body:has(.screen:-webkit-full-screen){
 
   </div>
 
-  <!-- CALY EKRAN -->
   <button
     class="fullscreen"
     id="fullscreenBtn"
@@ -307,7 +285,6 @@ body:has(.screen:-webkit-full-screen){
 
 </section>
 
-
 <section id="gry" class="hide">
 
   <h2>WSZYSTIKE GRY</h2>
@@ -318,7 +295,6 @@ body:has(.screen:-webkit-full-screen){
 
 </section>
 
-
 <section id="info" class="hide">
 
   <h2>Info</h2>
@@ -327,7 +303,7 @@ body:has(.screen:-webkit-full-screen){
 
   <p>dzk emulator ruffle.</p>
 
- <p>gry maja big aura zrobione przez mnie lollllllllllllllllllllllll</p>
+  <p>gry maja big aura zrobione przez mnie lollllllllllllllllllllllll</p>
 
   <p>
     NAPISY:
@@ -338,7 +314,6 @@ body:has(.screen:-webkit-full-screen){
 
 </main>
 
-
 <script>
 
 /* =====================================================
@@ -347,13 +322,11 @@ body:has(.screen:-webkit-full-screen){
 
 const NAMES = {};
 
-
 /* =====================================================
    GRY ONLINE
    ===================================================== */
 
 let ONLINE = [];
-
 
 /* =====================================================
    ZMIENNE
@@ -363,7 +336,6 @@ const $ = s => document.querySelector(s);
 
 let player = null;
 let GAMES = [];
-
 
 /* =====================================================
    NAZWY
@@ -376,10 +348,8 @@ const pretty = f =>
     .replace(/[_-]+/g," ")
     .replace(/^./,c=>c.toUpperCase());
 
-
 const isSwf = f =>
   /\.swf$/i.test(f);
-
 
 const toGames = files =>
   files
@@ -390,7 +360,6 @@ const toGames = files =>
       file:"games/"+encodeURIComponent(f),
       desc:""
     }));
-
 
 /* =====================================================
    FOLDER games
@@ -423,7 +392,6 @@ async function fromListing(){
     )
     .filter(isSwf);
 }
-
 
 /* =====================================================
    GITHUB
@@ -484,7 +452,6 @@ async function fromGithub(){
   return f;
 }
 
-
 /* =====================================================
    games.json
    ===================================================== */
@@ -498,14 +465,13 @@ async function fromJson(){
     return [];
 
   const data = await r.json();
-  
+
   return data.map(game => ({
     name: game.pl_name,
     file: game.link,
     desc: ""
   }));
 }
-
 
 /* =====================================================
    WYKRYWANIE
@@ -534,7 +500,6 @@ async function detect(){
 
   return [];
 }
-
 
 /* =====================================================
    URUCHOMIENIE GRY
@@ -575,7 +540,6 @@ function play(g){
   window.scrollTo(0,0);
 }
 
-
 /* =====================================================
    PRAWDZIWY FULLSCREEN
    ===================================================== */
@@ -606,15 +570,6 @@ $("#fullscreenBtn").addEventListener(
         return;
       }
 
-
-      /*
-       * FULLSCREEN SAMEGO EKRANU GRY
-       *
-       * Nie .win.
-       * Nie całej strony.
-       * Tylko obszar Ruffle.
-       */
-
       if(gameScreen.requestFullscreen){
 
         await gameScreen.requestFullscreen();
@@ -636,7 +591,6 @@ $("#fullscreenBtn").addEventListener(
 
   }
 );
-
 
 /* =====================================================
    LISTA GIER
@@ -697,7 +651,6 @@ function render(el){
 
 }
 
-
 /* =====================================================
    RENDER
    ===================================================== */
@@ -709,10 +662,11 @@ function renderAll(){
 
 }
 
-
 /* =====================================================
-   MENU
+   MENU + INFO EASTER EGG
    ===================================================== */
+
+let infoClicks = 0;
 
 function show(p){
 
@@ -736,13 +690,30 @@ function show(p){
 
 }
 
-
 document
   .querySelectorAll("#side a")
-  .forEach(a=>
-    a.onclick=()=>show(a.dataset.p)
-  );
+  .forEach(a=>{
 
+    a.onclick=()=>{
+
+      if(a.dataset.p==="info"){
+
+        infoClicks++;
+
+        if(infoClicks>=3){
+
+          window.location.href="https://ptoszek.pl";
+          return;
+
+        }
+
+      }
+
+      show(a.dataset.p);
+
+    };
+
+  });
 
 /* =====================================================
    START
@@ -758,8 +729,8 @@ detect().then(g=>{
 
 </script>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle"></script>
 
 </body>
 </html>
+```
