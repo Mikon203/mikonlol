@@ -3,155 +3,113 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gry — mikon.lol</title>
-<meta name="description" content="Lista gier przeglądarkowych na mikon.lol. Zagraj w gry Flash przez Ruffle i gry HTML.">
+<title>Wszystkie gry — mikon.lol</title>
+<meta name="description" content="Gry przeglądarkowe on mikon.lol.">
 <link rel="canonical" href="https://mikon.lol/pl/gry/">
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#000}
-#side{position:fixed;inset:0 auto 0 0;width:158px;background:#111;padding-top:14px;z-index:20}
+html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#000}
+#side{position:fixed;left:0;top:0;bottom:0;width:158px;background:#111;padding-top:14px;z-index:20}
 #side a{display:block;color:#999;font-size:24px;padding:8px 14px;text-decoration:none;cursor:pointer}
-#side a:hover,#side a[aria-current=page]{color:#fff;background:#222}
-main{margin-left:158px;padding:24px 22px 60px;max-width:1100px}
-h1{font-size:38px;margin:0 0 16px}
-h2{font-size:25px;margin:0 0 8px}
-.game{padding:16px 0;border-bottom:1px solid #aaa;margin:0 0 4px}
-.game>p{margin:7px 0;line-height:1.45}
-.game-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.game-actions a{display:inline-block;padding:9px 14px;background:#111;color:#fff;border:1px solid #555;text-decoration:none;font-size:14px;line-height:1.2}
-.game-actions a:hover{background:#333;color:#fff}
-.game-actions a:focus-visible,#side a:focus-visible{outline:3px solid #1ba1e2;outline-offset:2px}
-.game-actions a.source{background:#eee;color:#111;border-color:#aaa}
-.game-actions a.source:hover{background:#ddd}
-@media(max-width:600px){#side{width:96px}#side a{font-size:16px;padding:8px}main{margin-left:96px;padding:18px 12px}}
+#side a:hover,#side a.on{color:#fff;background:#222}
+main{margin-left:158px;padding:20px 18px 60px}
+h2{font-size:36px;margin:18px 0 12px}
+hr{border:0;border-top:2px solid #333;margin:14px 0}
+.go{background:none;border:0;padding:0;margin-top:6px;cursor:pointer;display:block}
+.grajsm{width:120px;height:auto;display:block}
+.go:hover .grajsm{filter:brightness(1.25)}
+.item{margin-bottom:26px}
+@media(max-width:600px){#side{width:96px}#side a{font-size:16px;padding:8px}main{margin-left:96px}h2{font-size:26px}}
 </style>
 </head>
 <body>
-<nav id="side" aria-label="Nawigacja główna">
+<nav id="side">
 <a href="../">Start</a>
-<a href="./" aria-current="page">Gry</a>
+<a href="./" class="on">Gry</a>
 <a href="../info/">Info</a>
 </nav>
 <main>
-<h1>Wszystkie gry</h1>
-<p>Lista gier przeglądarkowych na mikon.lol. Zagraj w gry Flash przez Ruffle i gry HTML.</p>
-<article class="game">
+<h2>Wszystkie gry</h2>
+<hr>
+<article class="item">
 <h2>DZIWNY KLOCEK</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=DZIWNY%20KLOCEK">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/bloxorz.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=DZIWNY%20KLOCEK" aria-label="Graj: DZIWNY KLOCEK"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>CHLOP Z DRINKAMI</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=CHLOP%20Z%20DRINKAMI">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/flash_therightmix.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=CHLOP%20Z%20DRINKAMI" aria-label="Graj: CHLOP Z DRINKAMI"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>PIZZA SEROWA</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=PIZZA%20SEROWA">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/papaspizzeria_v2.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=PIZZA%20SEROWA" aria-label="Graj: PIZZA SEROWA"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>TROCHE TRUDNA GRA</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=TROCHE%20TRUDNA%20GRA">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/theworldshardestgame.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=TROCHE%20TRUDNA%20GRA" aria-label="Graj: TROCHE TRUDNA GRA"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>CZERWONA KULKA</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=CZERWONA%20KULKA">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/kulka.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=CZERWONA%20KULKA" aria-label="Graj: CZERWONA KULKA"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>SUPER MARIA</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=SUPER%20MARIA">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/super-mario-flash-2.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=SUPER%20MARIA" aria-label="Graj: SUPER MARIA"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>NIEBIESKI DZIWAK</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=NIEBIESKI%20DZIWAK">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/sonic.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=NIEBIESKI%20DZIWAK" aria-label="Graj: NIEBIESKI DZIWAK"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>MIAŁ</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=MIA%C5%81">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/kot.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=MIA%C5%81" aria-label="Graj: MIAŁ"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>BALONKI</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=BALONKI">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/bloonstd.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=BALONKI" aria-label="Graj: BALONKI"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>LATAJACE CZERWONE KULKI</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=LATAJACE%20CZERWONE%20KULKI">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/latajaca%20kulka.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=LATAJACE%20CZERWONE%20KULKI" aria-label="Graj: LATAJACE CZERWONE KULKI"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>DIDDY SIMULATOR</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=DIDDY%20SIMULATOR">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/w%20prsion.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=DIDDY%20SIMULATOR" aria-label="Graj: DIDDY SIMULATOR"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>RYBKI</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=RYBKI">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/flash_fishy.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=RYBKI" aria-label="Graj: RYBKI"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>ZOLTA KULKA</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=ZOLTA%20KULKA">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/pacman.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=ZOLTA%20KULKA" aria-label="Graj: ZOLTA KULKA"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>GABKA Z KANSIATIMY PORTAMI</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=GABKA%20Z%20KANSIATIMY%20PORTAMI">Graj na mikon.lol</a>
-<a class="source" href="https://file.garden/afOd2ilbYh0xRrwS/games/spongebob-adventure.swf" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=GABKA%20Z%20KANSIATIMY%20PORTAMI" aria-label="Graj: GABKA Z KANSIATIMY PORTAMI"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>COUNTER STRIKE 1.6</h2>
-<p>Gra przeglądarkowa.</p>
-<div class="game-actions"><a href="../?game=COUNTER%20STRIKE%201.6">Graj na mikon.lol</a>
-<a class="source" href="https://csjs.live/" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=COUNTER%20STRIKE%201.6" aria-label="Graj: COUNTER STRIKE 1.6"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>OIII BLYAT</h2>
-<p>By Nicky Case · Public domain / CC0</p>
-<div class="game-actions"><a href="../?game=OIII%20BLYAT">Graj na mikon.lol</a>
-<a class="source" href="https://html-classic.itch.zone/html/300364/index.html" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=OIII%20BLYAT" aria-label="Graj: OIII BLYAT"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>TAŃCIE WYGIBAŃCIE</h2>
-<p>By The Funkin' Crew · Official itch.io browser build</p>
-<div class="game-actions"><a href="../?game=TA%C5%83CIE%20WYGIBA%C5%83CIE">Graj na mikon.lol</a>
-<a class="source" href="https://html-classic.itch.zone/html/16944508-1877713/index.html" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=TA%C5%83CIE%20WYGIBA%C5%83CIE" aria-label="Graj: TAŃCIE WYGIBAŃCIE"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>AUTKO BRUM BRUM</h2>
-<p>By Kodub · Opens the official itch.io game page</p>
-<div class="game-actions"><a href="https://kodub.itch.io/polytrack">Otwórz grę</a></div>
+<a class="go" href="../?game=AUTKO%20BRUM%20BRUM" aria-label="Graj: AUTKO BRUM BRUM"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>JOB JOB JOB SAHUR</h2>
-<p>By piripiripiri · Opens the official itch.io game page</p>
-<div class="game-actions"><a href="https://piripiripiri.itch.io/overnight-interview">Otwórz grę</a></div>
+<a class="go" href="../?game=JOB%20JOB%20JOB%20SAHUR" aria-label="Graj: JOB JOB JOB SAHUR"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
-<article class="game">
+<article class="item">
 <h2>CZERWONY PRZYCISK</h2>
-<p>By Four Quarters · Official itch.io browser build</p>
-<div class="game-actions"><a href="../?game=CZERWONY%20PRZYCISK">Graj na mikon.lol</a>
-<a class="source" href="https://html-classic.itch.zone/html/496812/index.html" rel="noopener"> Źródło gry</a></div>
+<a class="go" href="../?game=CZERWONY%20PRZYCISK" aria-label="Graj: CZERWONY PRZYCISK"><img class="grajsm" src="https://images.cooltext.com/5764995.gif" alt="Graj" width="198" height="123"></a>
 </article>
 </main>
 <script>
