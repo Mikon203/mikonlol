@@ -114,7 +114,7 @@ hr{border:0;border-top:2px solid #333;margin:14px 0}
 </main>
 <script>
 const theme=localStorage.getItem("mikonlol-easter-egg-theme");
-if(theme==="kasti"||theme==="opsec"){document.documentElement.style.backgroundImage='url("/'+theme+'.gif")';document.documentElement.style.backgroundSize="100% 100%";document.documentElement.style.backgroundPosition="center";document.documentElement.style.backgroundAttachment="fixed";}
+if(theme==="kasti"||theme==="opsec"){document.documentElement.style.backgroundImage='url("/'+theme+'.gif")';document.documentElement.style.backgroundSize="100% 100%";document.documentElement.style.backgroundPosition="center";document.documentElement.style.backgroundAttachment="fixed";document.body.style.backgroundColor="transparent";}else{document.documentElement.style.backgroundImage="none";document.body.style.backgroundColor="#fff";}
 let infoClicks=0,lastInfoClick=0;
 document.querySelector('a[href="../info/"]').addEventListener("click",e=>{const now=Date.now();if(now-lastInfoClick>700)infoClicks=0;infoClicks++;lastInfoClick=now;if(infoClicks>=3){e.preventDefault();location.href="/hahahahaha";}});
 </script>
