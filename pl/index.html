@@ -200,6 +200,20 @@ body:has(.screen:-webkit-full-screen){
   background:#000;
 }
 
+.screen iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#000;
+}
+
+.screen:fullscreen iframe,
+.screen:-webkit-full-screen iframe{
+  width:100vw !important;
+  height:100vh !important;
+}
+
 @media(max-width:600px){
   #side{
     width:96px;
@@ -479,6 +493,7 @@ async function fromJson(){
   return data.map(game => ({
     name: game.pl_name,
     file: game.link,
+    type: game.type || "swf",
     desc: ""
   }));
 }
@@ -522,6 +537,30 @@ function play(g){
   const box=$("#homeScreen");
 
   box.innerHTML="";
+
+  /* HTML games (type: "html") run in an iframe */
+  if(g.type==="html"){
+
+    const f=document.createElement("iframe");
+
+    f.src=g.file;
+    f.allow="fullscreen; autoplay; gamepad; pointer-lock; clipboard-write";
+    f.allowFullscreen=true;
+    f.referrerPolicy="no-referrer";
+    f.addEventListener("load",()=>f.focus());
+
+    box.appendChild(f);
+
+    player=null;
+
+    $("#homeName").textContent=g.name;
+
+    show("home");
+
+    window.scrollTo(0,0);
+
+    return;
+  }
 
   const r=
     window.RufflePlayer &&
@@ -755,4 +794,3 @@ detect().then(g=>{
 
 </body>
 </html>
-```
