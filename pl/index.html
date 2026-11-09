@@ -54,6 +54,27 @@ main{
   text-transform:uppercase;
 }
 
+.secret-code-wrap{
+  margin-top:28px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:8px;
+}
+
+.secret-code-wrap label{
+  font-weight:bold;
+}
+
+.secret-code-wrap input{
+  width:min(100%,320px);
+  padding:10px 12px;
+  border:1px solid #777;
+  background:#fff;
+  color:#000;
+  font:inherit;
+}
+
 hr{
   border:0;
   border-top:2px solid #333;
@@ -326,6 +347,11 @@ body:has(.screen:-webkit-full-screen){
     <a href="https://es.cooltext.com">sa z tad</a>.
   </p>
 
+  <div class="secret-code-wrap">
+    <label for="secretCode">SEKRETNY KOD OMG</label>
+    <input id="secretCode" type="text" autocomplete="off" spellcheck="false" placeholder="Wpisz kod...">
+  </div>
+
 </section>
 
 </main>
@@ -351,6 +377,22 @@ let ONLINE = [];
    ===================================================== */
 
 const $ = s => document.querySelector(s);
+
+const secretCodeInput = $("#secretCode");
+secretCodeInput.addEventListener("input", () => {
+  const isKasti = secretCodeInput.value.trim().toLowerCase() === "kasti";
+
+  if (isKasti) {
+    document.body.style.backgroundImage = 'url("/kasti.gif")';
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundAttachment = "fixed";
+    document.body.style.backgroundRepeat = "no-repeat";
+  } else {
+    document.body.style.backgroundImage = "none";
+    document.body.style.backgroundColor = "#fff";
+  }
+});
 
 let player = null;
 let GAMES = [];
