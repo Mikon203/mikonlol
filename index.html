@@ -26,5 +26,14 @@ html,body{margin:0;padding:0;height:100%}
   </div>
 
 </div>
+<script>
+const theme = localStorage.getItem("mikonlol-easter-egg-theme");
+if (theme === "kasti" || theme === "opsec") {
+  document.documentElement.style.backgroundImage = `url("/${theme}.gif")`;
+  document.documentElement.style.backgroundSize = "100% 100%";
+  document.documentElement.style.backgroundPosition = "center";
+  document.documentElement.style.backgroundAttachment = "fixed";
+}
+</script>
 </body>
 </html>
