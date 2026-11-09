@@ -358,10 +358,11 @@ const $ = s => document.querySelector(s);
 const secretCodeInput = $("#secretCode");
 
 secretCodeInput.addEventListener("input", () => {
-  const isKasti = secretCodeInput.value.trim().toLowerCase() === "kasti";
+  const code = secretCodeInput.value.trim().toLowerCase();
+  const backgroundGif = code === "kasti" ? "kasti.gif" : code === "opsec" ? "opsec.gif" : null;
 
-  if (isKasti) {
-    document.documentElement.style.backgroundImage = 'url("/kasti.gif")';
+  if (backgroundGif) {
+    document.documentElement.style.backgroundImage = `url("/${backgroundGif}")`;
     document.documentElement.style.backgroundSize = "100% 100%";
     document.documentElement.style.backgroundPosition = "center";
     document.documentElement.style.backgroundAttachment = "fixed";
