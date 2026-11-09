@@ -8,7 +8,7 @@
 <p>Napisy z CoolText.</p><p>Sekretny kod omg</p><label for="secretCode">Wpisz kod</label><br><input id="secretCode" type="text" autocomplete="off"></main>
 <script>
 const KEY="mikonlol-easter-egg-theme";
-function applyTheme(theme){if(theme==="kasti"||theme==="opsec"){document.documentElement.style.backgroundImage='url("/'+theme+'.gif")';document.documentElement.style.backgroundSize="100% 100%";document.documentElement.style.backgroundPosition="center";document.documentElement.style.backgroundAttachment="fixed";}else{document.documentElement.style.backgroundImage="none";}}
+function applyTheme(theme){if(theme==="kasti"||theme==="opsec"){document.documentElement.style.backgroundImage='url("/'+theme+'.gif")';document.documentElement.style.backgroundSize="100% 100%";document.documentElement.style.backgroundPosition="center";document.documentElement.style.backgroundAttachment="fixed";document.body.style.backgroundColor="transparent";}else{document.documentElement.style.backgroundImage="none";document.body.style.backgroundColor="#fff";}}
 applyTheme(localStorage.getItem(KEY));
 document.getElementById("secretCode").addEventListener("input",e=>{const v=e.target.value.trim().toLowerCase();const t=v==="kasti"||v==="opsec"?v:null;if(t)localStorage.setItem(KEY,t);else localStorage.removeItem(KEY);applyTheme(t);});
 let infoClicks=0,lastInfoClick=0;
