@@ -417,10 +417,10 @@ let ONLINE = [];
 const $ = s => document.querySelector(s);
 
 const secretCodeInput = $("#secretCode");
+const EASTER_EGG_STORAGE_KEY = "mikonlol-easter-egg-theme";
 
-secretCodeInput.addEventListener("input", () => {
-  const code = secretCodeInput.value.trim().toLowerCase();
-  const backgroundGif = code === "kasti" ? "kasti.gif" : code === "opsec" ? "opsec.gif" : null;
+function applyEasterEggTheme(theme) {
+  const backgroundGif = theme === "kasti" ? "kasti.gif" : theme === "opsec" ? "opsec.gif" : null;
 
   if (backgroundGif) {
     document.documentElement.style.backgroundImage = `url("/${backgroundGif}")`;
@@ -432,7 +432,25 @@ secretCodeInput.addEventListener("input", () => {
     document.documentElement.style.backgroundImage = "none";
     document.body.style.backgroundColor = "#fff";
   }
-});
+}
+
+// Restore the theme when navigating between pages.
+applyEasterEggTheme(localStorage.getItem(EASTER_EGG_STORAGE_KEY));
+
+if (secretCodeInput) {
+  secretCodeInput.addEventListener("input", () => {
+    const code = secretCodeInput.value.trim().toLowerCase();
+    const theme = code === "kasti" || code === "opsec" ? code : null;
+
+    if (theme) {
+      localStorage.setItem(EASTER_EGG_STORAGE_KEY, theme);
+    } else {
+      localStorage.removeItem(EASTER_EGG_STORAGE_KEY);
+    }
+
+    applyEasterEggTheme(theme);
+  });
+}
 
 let player = null;
 let GAMES = [];
