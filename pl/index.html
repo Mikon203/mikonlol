@@ -24,6 +24,8 @@ html,body{
   width:158px;
   background:#111;
   padding-top:14px;
+  z-index:20;
+  transition:transform .22s ease;
   user-select:none;
 }
 
@@ -66,7 +68,7 @@ h2{
 }
 
 .win{
-  width:min(100%,640px);
+  width:min(100%,1200px);
   border:1px solid #666;
   background:#000;
 }
@@ -74,7 +76,7 @@ h2{
 .screen{
   background:#000;
   width:100%;
-  height:min(70vw,400px);
+  height:clamp(420px,72vh,780px);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -195,6 +197,36 @@ body:has(.screen:-webkit-full-screen) .vm{
   display:none;
 }
 
+/* Collapsible navigation while a game is running */
+#menuToggle{
+  display:none;
+  position:fixed;
+  top:14px;
+  left:14px;
+  z-index:30;
+  width:48px;
+  height:44px;
+  padding:9px 10px;
+  border:1px solid #555;
+  border-radius:4px;
+  background:#111;
+  cursor:pointer;
+}
+#menuToggle span{
+  display:block;
+  width:26px;
+  height:3px;
+  margin:4px 0;
+  border-radius:2px;
+  background:#fff;
+}
+body.game-open #menuToggle{display:block}
+body.game-open #side{transform:translateX(-100%)}
+body.game-open.menu-open #side{transform:translateX(0)}
+body.game-open main{margin-left:0;padding-top:70px}
+body.game-open.menu-open #menuToggle{left:174px}
+
+
 body:has(.screen:fullscreen),
 body:has(.screen:-webkit-full-screen){
   background:#000;
@@ -228,6 +260,15 @@ body:has(.screen:-webkit-full-screen){
     margin-left:96px;
   }
 
+  body.game-open main{
+    margin-left:0;
+    padding-top:70px;
+  }
+
+  body.game-open.menu-open #menuToggle{
+    left:108px;
+  }
+
   h2{
     font-size:26px;
   }
@@ -236,6 +277,12 @@ body:has(.screen:-webkit-full-screen){
 </head>
 
 <body>
+
+<button id="menuToggle" aria-label="Otwórz menu" aria-expanded="false" title="Menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
 
 <div id="side">
   <a data-p="home" class="on">Start</a>
@@ -592,6 +639,7 @@ function play(g){
     $("#homeName").textContent=g.name;
 
     show("home");
+    document.body.classList.add("game-open");
 
     window.scrollTo(0,0);
 
@@ -623,6 +671,7 @@ function play(g){
   $("#homeName").textContent=g.name;
 
   show("home");
+  document.body.classList.add("game-open");
 
   window.scrollTo(0,0);
 }
@@ -802,6 +851,9 @@ document.querySelectorAll("#side a").forEach(a=>{
 
 function show(p){
 
+  document.body.classList.remove("game-open","menu-open");
+  $("#menuToggle").setAttribute("aria-expanded","false");
+
   document
     .querySelectorAll("main>section")
     .forEach(s=>
@@ -822,6 +874,12 @@ function show(p){
 
 }
 
+
+/* Hamburger menu */
+$("#menuToggle").addEventListener("click",()=>{
+  const open = document.body.classList.toggle("menu-open");
+  $("#menuToggle").setAttribute("aria-expanded",String(open));
+});
 
 /* =====================================================
    START
