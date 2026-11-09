@@ -742,6 +742,7 @@ function renderAll(){
    ===================================================== */
 
 let infoClicks = 0;
+let lastInfoClick = 0;
 
 document.querySelectorAll("#side a").forEach(a=>{
 
@@ -751,10 +752,20 @@ document.querySelectorAll("#side a").forEach(a=>{
 
     if(this.dataset.p === "info"){
 
+      const now = Date.now();
+
+      // The secret sequence only counts clicks less than 700ms apart.
+      if(now - lastInfoClick > 700){
+        infoClicks = 0;
+      }
+
       infoClicks++;
+      lastInfoClick = now;
 
       if(infoClicks >= 3){
 
+        infoClicks = 0;
+        lastInfoClick = 0;
         window.location.assign("https://mikon.lol/hahahahaha");
         return;
 
