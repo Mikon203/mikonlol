@@ -3,53 +3,93 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111">
+  <meta name="theme-color" content="#000">
   <title>hahahahaha</title>
   <style>
     * { box-sizing: border-box; }
-    body {
+
+    html, body {
       margin: 0;
-      padding: 32px;
-      color: #f5f5f5;
-      background: #111;
-      font: 16px/1.5 system-ui, sans-serif;
+      min-height: 100%;
+      background: #000;
     }
-    main { width: min(1100px, 100%); margin: 0 auto; }
-    h1 { margin: 0 0 6px; font-size: clamp(2rem, 6vw, 4rem); }
-    #status { color: #aaa; margin: 0 0 28px; }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    #soundToggle {
+      position: fixed;
+      z-index: 10;
+      top: 12px;
+      right: 12px;
+      width: min(662px, calc(100vw - 24px));
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    #soundToggle img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     #videos {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+      gap: 4px;
+      width: 100%;
+      padding: 0;
     }
-    article { min-width: 0; padding: 12px; background: #1c1c1c; border: 1px solid #333; }
-    video { display: block; width: 100%; max-height: 70vh; background: #000; }
-    article a { display: block; margin-top: 9px; color: #ddd; overflow-wrap: anywhere; }
-    .empty { padding: 22px; border: 1px solid #333; color: #bbb; }
+
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+      background: #000;
+    }
+
+    @media (max-width: 600px) {
+      #videos {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>hahahahaha</h1>
-    <p id="status">Looking for videos...</p>
-    <section id="videos" aria-live="polite"></section>
-  </main>
+  <button id="soundToggle" type="button" aria-label="Turn sound on">
+    <img
+      src="https://images.cooltext.com/5766486.gif"
+      width="662"
+      height="106"
+      alt="Dźwięk tak czy nie">
+  </button>
+
+  <main id="videos" aria-label="Videos"></main>
+
   <script>
     const owner = "Mikon203";
     const repo = "mikonlol";
     const branch = "main";
     const folder = "hahahahaha";
+
     const videoExtensions = new Set([
       "mp4", "m4v", "webm", "ogv", "ogg", "mov", "mkv",
       "avi", "mpg", "mpeg", "3gp", "3g2", "ts", "mts", "m2ts"
     ]);
 
-    const status = document.querySelector("#status");
     const gallery = document.querySelector("#videos");
+    const soundToggle = document.querySelector("#soundToggle");
+
+    let soundEnabled = false;
+    const players = [];
 
     function isVideo(path) {
-      const extension = path.split(".").pop().toLowerCase();
-      return videoExtensions.has(extension);
+      return videoExtensions.has(path.split(".").pop().toLowerCase());
     }
 
     function rawUrl(path) {
@@ -57,24 +97,42 @@
         branch + "/" + path.split("/").map(encodeURIComponent).join("/");
     }
 
-    function showVideo(path) {
-      const url = rawUrl(path);
-      const card = document.createElement("article");
+    function addVideo(path) {
       const player = document.createElement("video");
-      player.controls = true;
-      player.preload = "metadata";
+
+      player.autoplay = true;
+      player.muted = true;
+      player.defaultMuted = true;
+      player.loop = true;
       player.playsInline = true;
-      player.src = url;
+      player.preload = "auto";
+      player.disablePictureInPicture = true;
+      player.src = rawUrl(path);
 
-      const link = document.createElement("a");
-      link.href = url;
-      link.textContent = path.slice(folder.length + 1);
-      link.target = "_blank";
-      link.rel = "noopener";
+      player.addEventListener("canplay", () => {
+        player.play().catch(() => {});
+      });
 
-      card.append(player, link);
-      gallery.append(card);
+      gallery.appendChild(player);
+      players.push(player);
     }
+
+    soundToggle.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+
+      players.forEach(player => {
+        player.muted = !soundEnabled;
+
+        if (soundEnabled) {
+          player.play().catch(() => {});
+        }
+      });
+
+      soundToggle.setAttribute(
+        "aria-label",
+        soundEnabled ? "Turn sound off" : "Turn sound on"
+      );
+    });
 
     async function loadVideos() {
       try {
@@ -83,32 +141,23 @@
           "/git/trees/" + branch + "?recursive=1"
         );
 
-        if (!response.ok) {
-          throw new Error("GitHub returned HTTP " + response.status);
-        }
+        if (!response.ok) return;
 
         const data = await response.json();
-        if (data.truncated) {
-          throw new Error("GitHub's file listing was truncated.");
-        }
+        if (data.truncated) return;
 
         const prefix = folder + "/";
         const files = (data.tree || [])
-          .filter(item => item.type === "blob" &&
-            item.path.startsWith(prefix) && isVideo(item.path))
+          .filter(item =>
+            item.type === "blob" &&
+            item.path.startsWith(prefix) &&
+            isVideo(item.path)
+          )
           .sort((a, b) => a.path.localeCompare(b.path));
 
-        if (!files.length) {
-          status.textContent = "No videos found in /" + folder + " yet.";
-          gallery.innerHTML = '<p class="empty">Drop video files into the hahahahaha folder on GitHub and refresh this page.</p>';
-          return;
-        }
-
-        status.textContent = files.length + " video" +
-          (files.length === 1 ? "" : "s") + " found.";
-        files.forEach(file => showVideo(file.path));
+        files.forEach(file => addVideo(file.path));
       } catch (error) {
-        status.textContent = "Couldn't load the videos: " + error.message;
+        console.error("Couldn't load videos:", error);
       }
     }
 
