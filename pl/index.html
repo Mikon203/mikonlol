@@ -596,7 +596,7 @@ async function fromJson(){
     name: game.pl_name,
     file: game.link,
     type: game.type || "swf",
-    desc: ""
+    desc: game.desc || ""
   }));
 }
 
@@ -609,9 +609,9 @@ async function detect(){
 
   for(
     const fn of [
+      fromJson,
       fromListing,
-      fromGithub,
-      fromJson
+      fromGithub
     ]
   ){
 
