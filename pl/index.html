@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gry Flasz</title>
+<meta name="description" content="Gry przeglądarkowe, gry Flash i HTML na mikon.lol.">
+<link rel="canonical" href="https://mikon.lol/pl/">
 
 <style>
 *{box-sizing:border-box}
@@ -290,9 +292,9 @@ body:has(.screen:-webkit-full-screen){
 </button>
 
 <div id="side">
-  <a data-p="home" class="on">Start</a>
-  <a data-p="gry">Gry</a>
-  <a data-p="info">Info</a>
+  <a href="./" data-p="home" class="on">Start</a>
+  <a href="gry/" data-p="gry">Gry</a>
+  <a href="info/" data-p="info">Info</a>
 </div>
 
 <main>
@@ -832,42 +834,6 @@ function renderAll(){
 let infoClicks = 0;
 let lastInfoClick = 0;
 
-document.querySelectorAll("#side a").forEach(a=>{
-
-  a.addEventListener("click", function(e){
-
-    e.preventDefault();
-
-    if(this.dataset.p === "info"){
-
-      const now = Date.now();
-
-      // The secret sequence only counts clicks less than 700ms apart.
-      if(now - lastInfoClick > 700){
-        infoClicks = 0;
-      }
-
-      infoClicks++;
-      lastInfoClick = now;
-
-      if(infoClicks >= 3){
-
-        infoClicks = 0;
-        lastInfoClick = 0;
-        window.location.assign("https://mikon.lol/hahahahaha");
-        return;
-
-      }
-
-    }
-
-    show(this.dataset.p);
-
-  });
-
-});
-
-
 /* =====================================================
    POKAZYWANIE SEKCJI
    ===================================================== */
@@ -909,11 +875,10 @@ $("#menuToggle").addEventListener("click",()=>{
    ===================================================== */
 
 detect().then(g=>{
-
   GAMES = g;
-
   renderAll();
-
+  const requested = new URLSearchParams(location.search).get("game");
+  if(requested){const match=GAMES.find(game=>game.name===requested);if(match)play(match);}
 });
 
 </script>
