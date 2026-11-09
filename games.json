@@ -74,5 +74,40 @@
     "pl_name": "COUNTER STRIKE 1.6",
     "link": "https://csjs.live/",
     "type": "html"
+  },
+  {
+    "en_name": "WE BECOME WHAT WE BEHOLD",
+    "pl_name": "STAJEMY SIĘ TYM, NA CO PATRZYMY",
+    "link": "https://html-classic.itch.zone/html/300364/index.html",
+    "type": "html",
+    "desc": "By Nicky Case · Public domain / CC0"
+  },
+  {
+    "en_name": "FRIDAY NIGHT FUNKIN'",
+    "pl_name": "FRIDAY NIGHT FUNKIN'",
+    "link": "https://html-classic.itch.zone/html/16944508-1877713/index.html",
+    "type": "html",
+    "desc": "By The Funkin' Crew · Official itch.io browser build"
+  },
+  {
+    "en_name": "POLYTRACK",
+    "pl_name": "POLYTRACK",
+    "link": "https://kodub.itch.io/polytrack",
+    "type": "link",
+    "desc": "By Kodub · Opens the official itch.io game page"
+  },
+  {
+    "en_name": "OVERNIGHT INTERVIEW",
+    "pl_name": "OVERNIGHT INTERVIEW",
+    "link": "https://piripiripiri.itch.io/overnight-interview",
+    "type": "link",
+    "desc": "By piripiripiri · Opens the official itch.io game page"
+  },
+  {
+    "en_name": "PLEASE, DON'T TOUCH ANYTHING (LD31)",
+    "pl_name": "PLEASE, DON'T TOUCH ANYTHING (LD31)",
+    "link": "https://html-classic.itch.zone/html/496812/index.html",
+    "type": "html",
+    "desc": "By Four Quarters · Official itch.io browser build"
   }
 ]
