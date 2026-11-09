@@ -79,35 +79,30 @@
     "en_name": "OIII BLYAT",
     "pl_name": "OIII BLYAT",
     "link": "https://html-classic.itch.zone/html/300364/index.html",
-    "type": "html",
-    "desc": "By Nicky Case · Public domain / CC0"
+    "type": "html"
   },
   {
     "en_name": "DANCE O ALGO",
     "pl_name": "TAŃCIE WYGIBAŃCIE",
     "link": "https://html-classic.itch.zone/html/16944508-1877713/index.html",
-    "type": "html",
-    "desc": "By The Funkin' Crew · Official itch.io browser build"
+    "type": "html"
   },
   {
     "en_name": "VROOM VROOM",
     "pl_name": "AUTKO BRUM BRUM",
     "link": "https://kodub.itch.io/polytrack",
-    "type": "link",
-    "desc": "By Kodub · Opens the official itch.io game page"
+    "type": "link"
   },
   {
     "en_name": "JOB JOB JOB SAHUR",
     "pl_name": "JOB JOB JOB SAHUR",
     "link": "https://piripiripiri.itch.io/overnight-interview",
-    "type": "link",
-    "desc": "By piripiripiri · Opens the official itch.io game page"
+    "type": "link"
   },
   {
     "en_name": "EL BUTTON",
     "pl_name": "CZERWONY PRZYCISK",
     "link": "https://html-classic.itch.zone/html/496812/index.html",
-    "type": "html",
-    "desc": "By Four Quarters · Official itch.io browser build"
+    "type": "html"
   }
 ]
