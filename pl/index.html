@@ -321,6 +321,15 @@ body:has(.screen:-webkit-full-screen){
 
   <p>gry maja big aura zrobione przez mnie lollllllllllllllllllllllll</p>
 
+  <hr>
+  <h3>Autorzy gier i informacje</h3>
+  <p><strong>We Become What We Behold</strong> — Nicky Case. Kod: Unlicense; zasoby: CC0. <a href="https://ncase.itch.io/wbwwb" target="_blank" rel="noopener">Oryginalna gra</a>.</p>
+  <p><strong>Friday Night Funkin'</strong> — The Funkin' Crew, ninjamuffin99, PhantomArcade, evilsk8r i kawaisprite. Kod: Apache 2.0; zasoby gry są zastrzeżone (All Rights Reserved). Strona osadza oficjalną wersję przeglądarkową z itch.io i nie hostuje jej zasobów. <a href="https://ninja-muffin24.itch.io/funkin" target="_blank" rel="noopener">Oryginalna gra</a>.</p>
+  <p><strong>PolyTrack</strong> — Kodub. <a href="https://kodub.itch.io/polytrack" target="_blank" rel="noopener">Oficjalna strona itch.io</a>.</p>
+  <p><strong>Overnight Interview</strong> — piripiripiri. <a href="https://piripiripiri.itch.io/overnight-interview" target="_blank" rel="noopener">Oficjalna strona itch.io</a>.</p>
+  <p><strong>The Second Thought / Please, Don't Touch Anything (LD31)</strong> — Four Quarters team. Gra osadzona z oficjalnej wersji przeglądarkowej itch.io. <a href="https://fourquarters.itch.io/pdta-ld" target="_blank" rel="noopener">Oryginalna gra</a>.</p>
+  <p>Wszystkie gry, nazwy, grafiki, muzyka i pozostałe materiały należą do ich twórców. To nieoficjalna kolekcja fanowska, niezwiązana z twórcami ani przez nich niezatwierdzona. Wesprzyj twórców na ich oryginalnych stronach.</p>
+
   <p>
     NAPISY:
     <a href="https://es.cooltext.com">sa z tad</a>.
@@ -558,6 +567,12 @@ function play(g){
   const box=$("#homeScreen");
 
   box.innerHTML="";
+
+  /* External games open their official page in a new tab. */
+  if(g.type==="link"){
+    window.open(g.file,"_blank","noopener,noreferrer");
+    return;
+  }
 
   /* HTML games (type: "html") run in an iframe */
   if(g.type==="html"){
